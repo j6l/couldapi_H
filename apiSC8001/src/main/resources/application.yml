@@ -1,0 +1,36 @@
+server:
+  port: 8001
+
+logging:
+  level:
+    com:
+      jie:
+        dao: debug
+
+spring:
+  application:
+    name: consul-consumer
+  zipkin:
+    base-url: http://192.168.18.190:9411
+    sleuth:
+      sampler:
+        probability: 1.0f
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+  datasource:
+    url: jdbc:mysql://localhost:3306/stucould?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  type-aliases-package: com.jie.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+

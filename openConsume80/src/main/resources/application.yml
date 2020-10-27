@@ -1,0 +1,41 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-order-service
+  zipkin:
+    base-url: http://192.168.18.190:9411
+    sleuth:
+      sampler:
+        probability: 1.0f
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+
+ribbon:
+  #建立连接最长时间5s
+  ReadTimeout:  5000
+  #建立连接之后读取数据最长时间5s
+  ConnectTimeout: 5000
+
+logging:
+  level:
+    root: info
+    com.jie.web: debug
+
+app:
+  id: front-order
+apollo:
+  meta: http://localhost:8080
+  bootstrap:
+    enabled: true
+    namespaces: TEST1.bestf.ront-order.yml,application.yml
+#    eagerLoad:
+#      enabled: true #调整apollo到日志系统前面
+
+
+jie-kinf: 100
